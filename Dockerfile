@@ -29,6 +29,9 @@ run su api -c 'cd && mkdir .ssh/'
 # Copy over private key, and set permissions
 run chown -R api:api /home/api/.ssh/
 
+# ssl stuff
+run openssl dhparam -out /etc/ssl/dhparams.pem 2048
+
 ## Fix services 
 run rm /etc/nginx/sites-enabled/default
 run rm /etc/nginx/nginx.conf
@@ -38,6 +41,7 @@ run cp /home/docker/code/api.ini /etc/uwsgi-emperor/vassals/
 run cp /home/docker/code/emperor.ini /etc/uwsgi-emperor/
 run cp /home/docker/code/api.conf /etc/nginx/sites-enabled/
 run rm -rf /home/docker
+
 
 expose 80
 expose 443
